@@ -32,7 +32,7 @@ $title = 'Hotel Website';
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 
-    <?= $this->Html->css(['pageLayout', 'form', 'navbar', 'tags', 'slideshow', 'alerts', 'popup']) ?>
+    <?= $this->Html->css(['pageLayout', 'form', 'navbar', 'tags', 'slideshow', 'alerts', 'popup', 'table']) ?>
     <?= $this->Html->script(['navbar', 'tags', 'slideshow', 'popup']) ?>
 
     <?= $this->fetch('meta') ?>

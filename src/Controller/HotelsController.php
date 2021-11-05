@@ -15,6 +15,8 @@ class HotelsController extends AppController
 
 		$room =  $this->loadModel('Rooms');
 		$booking = $this->loadModel('Bookings');
+		$basket = $this->loadModel('Baskets');
+		$basketItems = $this->loadModel('BasketItems');
 	}
 
 	public function index()
@@ -178,11 +180,7 @@ class HotelsController extends AppController
 										<br>
 										<b>Room</b> $room->roon_number <br>
 										<b>Room Type:</b> $room->room_category <br><br>
-										<form method='post' action='/HotelWebsite/hotels/book/$room->roon_id'>
-											<button type='submit' class='bookBtn'>Book</button>
-											<input type='hidden' name='fromDate' value='$fromDate' />
-											<input type='hidden' name='toDate' value='$toDate' />
-										</form>
+										<a class='bookBtn' href='/HotelWebsite/hotels/book/$room->roon_id?from=$fromDate&to=$toDate'>Book</a>
 									</div>");
 							}
 					}
@@ -286,9 +284,45 @@ class HotelsController extends AppController
 
     public function book($id=null)
     {
+    	// Getting the booking dates from url
     	$room = $this->Rooms->get($id);
-    	debug($this->request->getData());
-    	// $str_arr = unserialize(urldecode($_GET['str']));
-    	// debug($str_arr);
+    	$from=$_GET['from'];
+    	$to=$_GET['to'];
+
+    	$from = str_replace(['/',], '-', $from);
+    	$to = str_replace(['/',], '-', $to);
+
+    	$user = $this->request->getAttribute('identity');
+    	$basket = $this->Baskets->find()->where(['user_id' => $user->id]);
+    	$basket = $basket->first();
+    	
+    	$from_ts = strtotime($from);
+    	$to_ts = strtotime($to);
+    	$days = $to_ts - $from_ts;
+    	$days = round($days / 84600);
+
+    	$total = $days*$room->rate;
+
+    	$basketitem = $this->BasketItems->newEmptyEntity();
+
+    	if($this->request->is('post'))
+    	{
+    		$basketitem->room_id = $room->roon_id;
+    		$basketitem->basket_id = $basket->basket_id;
+    		$basketitem->start_date = new DateTime($from);
+    		$basketitem->end_date = new DateTime($to);
+
+    		if ($this->BasketItems->save($basketitem))
+    		{
+    			$this->Flash->success(__('Item added to basket: '));
+                return $this->redirect(['controller' => 'Baskets', 'action' => 'index']);
+	 		}
+	 		$this->Flash->error(__('Unable to add that item to backet.'));
+    	}
+
+    	$this->set('room', $room);
+    	$this->set('from', $from);
+    	$this->set('to', $to);
+    	$this->set('total', $total);
     }
 }

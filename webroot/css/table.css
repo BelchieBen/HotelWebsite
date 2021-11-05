@@ -1,0 +1,17 @@
+td{
+	text-align: center;
+	vertical-align: top;
+}
+
+thead{
+	background-color: #222;
+	color: white;
+}
+
+thead, td{
+	padding: 16px;
+}
+
+tr:nth-child(even) {
+	background-color: #f2f2f2;
+}
