@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\config",
+    "\\src",
+    "\\src\\Controller",
+    "\\src\\Model",
+    "\\src\\Model\\Entity",
+    "\\src\\Model\\Table",
+    "\\templates",
+    "\\templates\\Users"
+  ],
+  "PreviewInSolutionExplorer": false
+}

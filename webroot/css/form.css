@@ -1,0 +1,142 @@
+.formContainer{
+    height: 75%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border: solid 2px;
+    border-color: #222222;
+    border-radius: 20px;
+}
+
+.formcard{
+    height: 5%;
+    display: flex;
+}
+
+.input {
+    margin-bottom: 2em;
+}
+
+.hiddenInput{
+    display: none;
+}
+
+input {
+    margin-bottom: 5vh;
+    border-radius: 5px;
+    border-color: teal;
+    width: 100%;
+    background-color:transparent;
+    outline: none;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 5px;
+    margin: 0;
+  }
+
+input[type="date"]{
+    width: auto;
+    margin-bottom: 2em;
+    font-family: 'Gilroy-Regular', sans-serif;
+}
+
+#endDate{
+    display: none;
+}
+
+fieldset {
+    padding: 6px;
+    border: none;
+}
+
+button {
+      padding: 7.5px 15px;
+      background: teal;
+      border: 1px #006d6d solid;
+      border-radius:10px;
+      color: white;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.deleteFrm{
+    display: flex;
+    flex-direction: row;
+}
+
+label {
+    font-weight: 600;
+}
+
+legend {
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+
+.ideagenLink{
+    color: #E30072;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.dangerBtn{
+    padding: 7.5px 15px;
+    background: #E30072;
+    border: 1px #E30072 solid;
+    border-radius:10px;
+    color: white;
+    text-decoration: none;
+}
+
+.dangerBtn:hover{
+    text-decoration: none;
+}
+
+.ideagenBtn{
+    padding: 7.5px 15px;
+    background: teal;
+    border: 1px #006d6d solid;
+    border-radius:10px;
+    color: white;
+    text-decoration: none;
+}
+
+.ideagenBtn:hover{
+    text-decoration: none;
+}
+
+.bottombtn{
+    padding: 7.5px 15px;
+    background: teal;
+    border: 1px #006d6d solid;
+    border-radius:10px;
+    color: white;
+    text-decoration: none;
+    display: none;
+    width: 130px;
+    text-align: center;
+}
+
+.bottombtn:hover{
+    text-decoration: none;
+}
+
+.roomImg{
+    width: 400px;
+    object-fit: cover;
+}
+
+.bookBtn{
+    padding: 7.5px 15px;
+    background: teal;
+    border: 1px #006d6d solid;
+    border-radius:10px;
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}

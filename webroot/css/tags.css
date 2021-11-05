@@ -1,0 +1,49 @@
+.input-categories{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.input-categories ul{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  list-style-type: none;
+  flex-wrap: wrap;
+}
+
+.input-categories li{
+  border: 1px solid teal;
+  background: teal;
+  color: white;
+  border-radius: 5px;
+  padding: 6px;
+  margin: 1px;
+  margin-bottom: 2em;
+}
+
+.input-categories input{
+  flex: 1 1 auto;
+  align-self: flex-start;
+}
+
+.pointer{
+  cursor: pointer;
+}
+
+.tagList{
+  display: flex;
+  flex-direction: row;
+}
+
+.tags{
+  flex: 0 0 auto;
+  border: 1px solid #E30072;
+  background: #E30072;
+  color: white;
+  font-size: 14px;
+  border-radius: 5px;
+  padding: 6px;
+  margin: 2px;
+  margin-bottom: 2em;
+}
