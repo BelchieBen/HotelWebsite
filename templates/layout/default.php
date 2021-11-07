@@ -48,6 +48,7 @@ $title = 'Hotel Website';
             <?php  if ($this->request->getAttribute('identity')['role'] == 'admin'): ?>
                 <li class="item"><?= $this->Html->link('Profile',['controller' => 'users', 'action' => 'profile']) ?></li>
                 <li class="item"><?= $this->Html->link('Admin',['controller' => 'admin', 'action' => 'index']) ?></li>
+                <li class="item"><?= $this->Html->link('Basket',['controller' => 'baskets', 'action' => 'index']) ?></li>
 
             <?php else: ?>
                 <li class="item"><?= $this->Html->link('Profile',['controller' => 'users', 'action' => 'profile']) ?></li>
