@@ -51,6 +51,7 @@ $title = 'Hotel Website';
 
             <?php else: ?>
                 <li class="item"><?= $this->Html->link('Profile',['controller' => 'users', 'action' => 'profile']) ?></li>
+                <li class="item"><?= $this->Html->link('Basket',['controller' => 'baskets', 'action' => 'index']) ?></li>
 
             <?php endif ?>
             </li>

@@ -295,6 +295,17 @@ class HotelsController extends AppController
     	$user = $this->request->getAttribute('identity');
     	$basket = $this->Baskets->find()->where(['user_id' => $user->id]);
     	$basket = $basket->first();
+
+    	// Creating a basket for the user if they do not have one
+    	if (is_null($basket))
+    	{
+    		$basket = $this->Baskets->newEmptyEntity();
+    		$basket->user_id = $user->id;
+    		$this->Baskets->save($basket);
+    	}
+
+    	$basket = $this->Baskets->find()->where(['user_id' => $user->id]);
+    	$basket = $basket->first();
     	
     	$from_ts = strtotime($from);
     	$to_ts = strtotime($to);
@@ -311,6 +322,7 @@ class HotelsController extends AppController
     		$basketitem->basket_id = $basket->basket_id;
     		$basketitem->start_date = new DateTime($from);
     		$basketitem->end_date = new DateTime($to);
+    		$basketitem->total = $total;
 
     		if ($this->BasketItems->save($basketitem))
     		{

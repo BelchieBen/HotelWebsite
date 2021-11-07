@@ -14,15 +14,18 @@
 			</tr>
 		</thead>
 		<tbody>
+			<?php foreach ($rooms as $room) : ?>
 				<tr>
-					<td><?php echo $this->Html->image('Rooms/'.$room->room_img, ['class' =>'roomImg']) ?></td>
-					<td>Room <?= $room->roon_number ?></td>
-					<td><?= $room->room_category ?></td>
-					<td><?= $from ?></td>
-					<td><?= $to ?></td>
-					<td>£<?= $total  ?></td>
-					<td><?php echo $this->Html->link("Add to basket", '/baskets' , ['class' => 'ideagenBtn']) ?></td>
+					<td><?php echo $this->Html->image('Rooms/'.$room['room_img'], ['class' =>'roomImg']) ?></td>
+					<td>Room <?= $room['roon_number'] ?></td>
+					<td><?= $room['room_category'] ?></td>
+					<td><?= $room['from'] ?></td>
+					<td><?= $room['to'] ?></td>
+					<td>£<?= $room['total']  ?></td>
+					<td><?= $this->Html->link("Remove", ['action' => 'remove', $room['item_id']],['class' => 'dangerBtn']) ?></td>
 				</tr>
+			<?php endforeach ?>
 		</tbody>
 	</table>
+	<?= $this->Html->link("Checkout", ['action' => 'checkout'],['class' => 'ideagenBtn']) ?>
 </div>
