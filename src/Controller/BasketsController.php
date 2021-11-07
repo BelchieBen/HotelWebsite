@@ -13,6 +13,7 @@ class BasketsController extends AppController
 		$room =  $this->loadModel('Rooms');
 		$basket = $this->loadModel('Baskets');
 		$basketItems = $this->loadModel('BasketItems');
+		$booking = $this->loadModel('Bookings');
 		
 	}
 
@@ -56,10 +57,7 @@ class BasketsController extends AppController
 					$from = $i->start_date;
 					$to = $i->end_date;
 
-					$from_ts = strtotime($from);
-			    	$to_ts = strtotime($to);
-			    	$days = $to_ts - $from_ts;
-			    	$days = round($days / 84600);
+					$total = $i->total;
 
 					$customArr = [];
 					foreach ($room as $r) 
@@ -74,8 +72,7 @@ class BasketsController extends AppController
 							"hotel_id" => $r->hotel_id,
 							"from" => $from,
 							"to" => $to,
-							"days_booked" => $days,
-							"total" => $r->total,
+							"total" => $total,
 						];
 					}
 					array_push($rooms, $customArr);
@@ -101,5 +98,15 @@ class BasketsController extends AppController
     		$this->Flash->error("Unable to remove that item");
     	}
     	$this->set('basketItem', $basketItem);
+	}
+
+	public function checkout()
+	{
+		$booking = $this->Bookings->newEmptyEntity();
+
+		if ($this->request->is('post'))
+		{
+
+		}
 	}
 }

@@ -1,4 +1,7 @@
 <div class="col1">
+	<?php if(empty($rooms)) : ?>
+		<h2>Your basket is empty <?= $user->firstname ?>!</h2>
+	<?php else : ?>
 	<h2>Your basket <?= $user->firstname ?></h2>
 
 	<table>
@@ -28,4 +31,5 @@
 		</tbody>
 	</table>
 	<?= $this->Html->link("Checkout", ['action' => 'checkout'],['class' => 'ideagenBtn']) ?>
+	<?php endif ?>
 </div>
