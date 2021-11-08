@@ -23,6 +23,7 @@ class AdminController extends AppController
 		}
 
 		$hotel =  $this->loadModel('Hotels');
+		$room =  $this->loadModel('Rooms');
 		$user = $this->request->getAttribute('identity');
 		$this->set(compact('user'));
 	}
@@ -30,6 +31,7 @@ class AdminController extends AppController
 	public function index()
 	{
 		$hotels = $this->Paginator->paginate($this->Hotels->find());
-		$this->set(compact('hotels'));
+		$rooms = $this->Paginator->paginate($this->Rooms->find()->contain(['Hotels']));
+		$this->set(['hotels' => $hotels, 'rooms' => $rooms]);
 	}
 }

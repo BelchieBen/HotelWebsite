@@ -12,6 +12,7 @@ class RoomsTable extends Table
     {
         $this->hasOne('RoomCategory', ['className' => 'RoomsCategories']);
         $this->hasMany('Bookings');
+        $this->belongsTo('Hotels');
     }
 	public function validationDefault(Validator $validator): Validator
 	{

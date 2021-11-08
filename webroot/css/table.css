@@ -11,3 +11,21 @@ thead{
 thead, td{
 	padding: 16px;
 }
+
+.updateBtn{
+	padding: 3px 7px;
+    background: #ffd412;
+    border: 1px #ffd412 solid;
+    border-radius:10px;
+    color: white;
+    text-decoration: none;
+}
+
+.deleteBtn{
+	padding: 3px 7px;
+    background: #E30072;
+    border: 1px #E30072 solid;
+    border-radius:10px;
+    color: white;
+    text-decoration: none;
+}

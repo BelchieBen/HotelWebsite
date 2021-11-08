@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Controller\AppController;
 use Cake\Event\EventInterface;
 
-class HomeController extends AppController
+class RoomsController extends AppController
 {
 	public function initialize():void
 	{
@@ -139,6 +139,7 @@ class HomeController extends AppController
 	 			// Manually updating attributes to preserve image name in database
 	 			$room->room_number = $this->request->getData('room_number');
 	 			$room->room_category = $this->request->getData('room_category');
+	 		}
 	 		else
 	 		{
 	 			// Looping through associative array to access file objects 
