@@ -70,8 +70,8 @@ class BasketsController extends AppController
 							"rate" => $r->rate,
 							"room_img" => $r->room_img,
 							"hotel_id" => $r->hotel_id,
-							"from" => $from,
-							"to" => $to,
+							"from" => $from->format("d/m/Y"),
+							"to" => $to->format("d/m/Y"),
 							"total" => $total,
 						];
 					}

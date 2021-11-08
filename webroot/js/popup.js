@@ -60,10 +60,14 @@ function getIntermediateDates(startDate, endDate)
 
     var currDate = moment(startDate).startOf('day');
     var lastDate = moment(endDate).startOf('day');
+    lastDate.add(1,'days');
 
-    while(currDate.add(1, 'days').diff(lastDate) < 0) {
-        dates.push(currDate.clone().toDate().toLocaleDateString());
+    while(currDate.isBefore(lastDate)){
+    	dates.push(currDate.clone().toDate().toLocaleDateString());
+    	currDate.add(1, 'days');
     }
+
+    console.log(dates);
 
     return dates;
 };
