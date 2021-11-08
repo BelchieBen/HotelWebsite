@@ -117,7 +117,6 @@ class BasketsController extends AppController
 
 		foreach ($items as $item) 
 		{
-			debug($item);
 			foreach ($item as $i) 
 			{
 				$room = $this->Rooms->find()->where(['roon_id' => $i->room_id]); 
@@ -130,13 +129,17 @@ class BasketsController extends AppController
 					$booking->booking_start = $i->start_date;
 					$booking->booking_end = $i->end_date;
 					$booking->total = $i->total;
-					debug($booking);
-					$this->Bookings->save($booking);
+					if($this->Bookings->save($booking))
+					{
+						// Removing the item after checkout
+						$this->BasketItems->delete($i);
+					}
+					else
+					{
+						$this->Flash->error("Unable to checkout");
+					}
 				}
 			}
-			
 		}
-
-		
 	}
 }
