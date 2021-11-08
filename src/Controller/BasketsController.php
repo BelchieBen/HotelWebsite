@@ -102,11 +102,10 @@ class BasketsController extends AppController
 
 	public function checkout()
 	{
-		$booking = $this->Bookings->newEmptyEntity();
 		$user = $this->request->getAttribute('identity');
 
 		// Getting the users basket
-		$basket = $this->Baskets->find()->where(['user_id' => $user->id])->contain(['BasketItems']);	
+		$basket = $this->Baskets->find()->where(['user_id' => $user->id])->contain(['BasketItems']);
 		$basket = $basket->toArray();
 
 		$items = [];
@@ -119,26 +118,24 @@ class BasketsController extends AppController
 		{
 			foreach ($item as $i) 
 			{
-				$room = $this->Rooms->find()->where(['roon_id' => $i->room_id]); 
-				$room = $room->toArray();
-				foreach ($room as $r) 
+				// Creating the booking 
+				$booking = $this->Bookings->newEmptyEntity();
+				$booking->booking_id = uniqid();
+				$booking->hotel_id = $i->hotel_id;
+				$booking->room_id = $i->room_id;
+				$booking->user_id = $user->id;
+				$booking->booking_start = $i->start_date;
+				$booking->booking_end = $i->end_date;
+				$booking->total = $i->total;
+				if($this->Bookings->save($booking))
 				{
-					$booking->hotel_id = $r->hotel_id;
-					$booking->room_id = $i->room_id;
-					$booking->user_id = $user->id;
-					$booking->booking_start = $i->start_date;
-					$booking->booking_end = $i->end_date;
-					$booking->total = $i->total;
-					if($this->Bookings->save($booking))
-					{
-						// Removing the item after checkout
-						$this->BasketItems->delete($i);
-					}
-					else
-					{
-						$this->Flash->error("Unable to checkout");
-					}
+					// Removing the item after checkout
+					$this->BasketItems->delete($i);
 				}
+				else
+				{
+					$this->Flash->error("Unable to checkout");
+				}	
 			}
 		}
 	}

@@ -155,30 +155,37 @@ class HotelsController extends AppController
 			echo("<div class='row'>");
 
 			// Comparing users date selection to all rooms booking dates to determine what rooms are available
-			if (empty($datesRoomBooked))
+			
+			foreach ($datesRoomBooked as $room => $bookings) 
 			{
-				// There are no bookings for this room
-				$rooms = $this->Rooms->find()->where(['roon_number' => $room]);
-				foreach ($rooms as $room) 
+				if (empty($bookings))
 				{
-					echo (
-						"<div class='col1'>
-							<img src='/HotelWebsite/img/Rooms/$room->room_img' class='roomImg' />
-							<br>
-							<b>Room</b> $room->roon_number <br>
-							<b>Room Type:</b> $room->room_category <br><br>
-							<a class='bookBtn' href='/HotelWebsite/hotels/book/$room->roon_id?from=$fromDate&to=$toDate'>Book</a>
-						</div>");
+					$rooms = $this->Rooms->find()->where(['roon_number' => $room]);
+							foreach ($rooms as $room) 
+							{
+								echo (
+									"<div class='col1'>
+										<img src='/HotelWebsite/img/Rooms/$room->room_img' class='roomImg' />
+										<br>
+										<b>Room</b> $room->roon_number <br>
+										<b>Room Type:</b> $room->room_category <br><br>
+										<a class='bookBtn' href='/HotelWebsite/hotels/book/$room->roon_id?from=$fromDate&to=$toDate'>Book</a>
+									</div>");
+							}
 				}
-
-			}
-			else
-			{
-				foreach ($datesRoomBooked as $room => $bookings) 
+				else
 				{
-					if (empty($bookings))
+					foreach ($bookings as $bookedDates) 
 					{
-						$rooms = $this->Rooms->find()->where(['roon_number' => $room]);
+						$compareArrays = array_diff($newDates, $bookedDates);
+						if($newDates != $compareArrays)
+						{
+							// Room unavailable
+						}
+						else
+						{
+							// Room available
+							$rooms = $this->Rooms->find()->where(['roon_number' => $room]);
 								foreach ($rooms as $room) 
 								{
 									echo (
@@ -190,36 +197,11 @@ class HotelsController extends AppController
 											<a class='bookBtn' href='/HotelWebsite/hotels/book/$room->roon_id?from=$fromDate&to=$toDate'>Book</a>
 										</div>");
 								}
-					}
-					else
-					{
-						foreach ($bookings as $bookedDates) 
-						{
-							$compareArrays = array_diff($newDates, $bookedDates);
-							if($newDates != $compareArrays)
-							{
-								// Room unavailable
-							}
-							else
-							{
-								// Room available
-								$rooms = $this->Rooms->find()->where(['roon_number' => $room]);
-									foreach ($rooms as $room) 
-									{
-										echo (
-											"<div class='col1'>
-												<img src='/HotelWebsite/img/Rooms/$room->room_img' class='roomImg' />
-												<br>
-												<b>Room</b> $room->roon_number <br>
-												<b>Room Type:</b> $room->room_category <br><br>
-												<a class='bookBtn' href='/HotelWebsite/hotels/book/$room->roon_id?from=$fromDate&to=$toDate'>Book</a>
-											</div>");
-									}
-							}
 						}
 					}
 				}
-			}	
+			}
+			
 			echo("</div>");
 			$this->set('rooms', $rooms);
 			exit;
@@ -353,6 +335,7 @@ class HotelsController extends AppController
     	if($this->request->is('post'))
     	{
     		$basketitem->room_id = $room->roon_id;
+    		$basketitem->hotel_id = $room->hotel_id;
     		$basketitem->basket_id = $basket->basket_id;
     		$basketitem->start_date = new DateTime($from);
     		$basketitem->end_date = new DateTime($to);
