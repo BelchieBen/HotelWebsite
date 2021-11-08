@@ -103,10 +103,40 @@ class BasketsController extends AppController
 	public function checkout()
 	{
 		$booking = $this->Bookings->newEmptyEntity();
+		$user = $this->request->getAttribute('identity');
 
-		if ($this->request->is('post'))
+		// Getting the users basket
+		$basket = $this->Baskets->find()->where(['user_id' => $user->id])->contain(['BasketItems']);	
+		$basket = $basket->toArray();
+
+		$items = [];
+		foreach($basket as $basketItems)
 		{
-
+			array_push($items, $basketItems->basket_items);
 		}
+
+		foreach ($items as $item) 
+		{
+			debug($item);
+			foreach ($item as $i) 
+			{
+				$room = $this->Rooms->find()->where(['roon_id' => $i->room_id]); 
+				$room = $room->toArray();
+				foreach ($room as $r) 
+				{
+					$booking->hotel_id = $r->hotel_id;
+					$booking->room_id = $i->room_id;
+					$booking->user_id = $user->id;
+					$booking->booking_start = $i->start_date;
+					$booking->booking_end = $i->end_date;
+					$booking->total = $i->total;
+					debug($booking);
+					$this->Bookings->save($booking);
+				}
+			}
+			
+		}
+
+		
 	}
 }
