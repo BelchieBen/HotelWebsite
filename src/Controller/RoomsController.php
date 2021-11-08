@@ -34,6 +34,9 @@ class RoomsController extends AppController
 		{
 			$hotel = $this->Hotels->newEmptyEntity();
 			$room = $this->Rooms->newEmptyEntity();
+			$selectHotel = $this->Rooms->Hotels->find()->select(['hotel_name']);
+			$selectHotel = $selectHotel->toArray();
+			debug($selectHotel);
 		 	if ($this->request->is('post'))
 		 	{
 		 		// Getting all the form data
@@ -92,7 +95,7 @@ class RoomsController extends AppController
 		 		}
 		 		$this->Flash->error(__('Unable to save room '.$room->room_number.'.'));
 		 	}
-		 	$this->set('room', $room);
+		 	$this->set(['room'=> $room, 'hotels' => $selectHotel]);
 		}
 
 	 	
