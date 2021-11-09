@@ -90,8 +90,8 @@
 							<td><?= $booking->hotel->hotel_name ?></td>
 							<td><?= $booking->room->roon_number ?></td>
 							<td><?= $booking->user_id ?></td>
-							<td><?= $booking->booking_start ?></td>
-							<td><?= $booking->booking_end ?></td>
+							<td><?= $booking->booking_start->format('d/m/y') ?></td>
+							<td><?= $booking->booking_end->format('d/m/y') ?></td>
 							<td>£<?= $booking->total ?></td>
 						</tr>
 					<?php endforeach ?>		

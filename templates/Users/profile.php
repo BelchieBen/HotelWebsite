@@ -40,8 +40,8 @@
                     <b class="recentBookingText">Booking reference: <?= $booking['booking_id'] ?></b>
                     <p class="recentBookingText">Room: <?= $booking['room_number']?></p>
                     <p class="recentBookingText"><?= $booking['room_category']?> Room</p>
-                    <p class="recentBookingText">Check-in: <?= $booking['check_in'] ?></p>
-                    <p class="recentBookingText">Check-out: <?= $booking['check_out'] ?></p>
+                    <p class="recentBookingText">Check-in: <?= $booking['check_in']->format('d/m/y') ?></p>
+                    <p class="recentBookingText">Check-out: <?= $booking['check_out']->format('d/m/y') ?></p>
                     <p class="recentBookingText">Number of nights: <?= $booking['days'] ?></p>
                     <p class="recentBookingText">Total Paid £<?= $booking['total'] ?></p>
                 </div>
