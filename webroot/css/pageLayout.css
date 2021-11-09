@@ -91,6 +91,10 @@ hr{
     margin-top: 2rem;
 }
 
+.ml-1{
+    margin-left: 1em;
+}
+
 .redbtn{
     padding: 7.5px 15px;
     background: #E30072;
@@ -103,12 +107,15 @@ hr{
 
 .yellowbtn{
     padding: 7.5px 15px;
-    background: #FFE066;
-    border: 1px #FFE066 solid;
+    background: #ffd412;
+    border: 1px #ffd412 solid;
     border-radius:10px;
     color: white;
     text-decoration: none;
     margin-bottom: 7.5px;
+    font-size: 16px;
+    display: block;
+    cursor: pointer;
 }
 
 .redbtn:hover{

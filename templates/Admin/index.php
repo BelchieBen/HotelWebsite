@@ -57,8 +57,8 @@
 							<td><?= $room->hotel->hotel_name ?></td>
 							<td><?= $room->room_category ?></td>
 							<td>£<?= $room->rate ?></td>
-							<td><?= $this->Html->link("Update", ['controller' => 'Rooms','action' => 'update' , $hotel['id']],['class' => 'updateBtn']) ?></td>
-							<td><?= $this->Html->link("Delete", ['controller' => 'Rooms', 'action' => 'delete', $hotel['id']],['class' => 'deleteBtn']) ?></td>
+							<td><?= $this->Html->link("Update", ['controller' => 'Rooms','action' => 'update' , $room['roon_id']],['class' => 'updateBtn']) ?></td>
+							<td><?= $this->Html->link("Delete", ['controller' => 'Rooms', 'action' => 'delete', $room['roon_id']],['class' => 'deleteBtn']) ?></td>
 						</tr>
 					<?php endforeach ?>		
 					</tbody>

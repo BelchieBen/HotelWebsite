@@ -15,6 +15,15 @@ class UsersController extends AppController
         $this->Authentication->addUnauthenticatedActions(['login','register']);
     }
 
+    public function initialize():void
+    {
+        parent::initialize();
+
+        $bookings = $this->loadModel('Bookings');
+        $rooms = $this->loadModel('Rooms');
+        $hotels = $this->loadModel('Hotels');
+    }
+
     public function login()
     {
         $this->request->allowMethod(['get', 'post']);
@@ -78,5 +87,70 @@ class UsersController extends AppController
             $this->Flash->error(__('Unable to add the user.'));
         }
         $this->set('user', $user);
+    }
+
+    public function profile()
+    {
+        $currentlyLoggedInUser = $this->request->getAttribute('identity');
+        $user = $this->Users->get($currentlyLoggedInUser->id);
+        $bookings = $this->Bookings->find()->where(['user_id' => $user->id]);
+        $bookings = $bookings->toArray();
+
+        $recentBookings = [];
+
+        $rooms = [];
+        foreach ($bookings as $booking) 
+        {
+            $room = $this->Rooms->get($booking->room_id);
+            $hotel = $this->Hotels->get($booking->hotel_id);
+            $bookingArray = [
+                'room_number' => $room->roon_number,
+                'room_img' => $room->room_img,
+                'booking_id' => $booking->booking_id,
+                'total' => $booking->total,
+                'check_in' => $booking->booking_start,
+                'check_out' => $booking->booking_end,
+                'hotel_name' => $hotel->hotel_name,
+                'room_category' => $room->room_category,
+            ];
+            array_push($recentBookings, $bookingArray);
+        }
+
+        if ($this->request->is(['post', 'put']))
+        {
+            $formData = $this->request->getData();
+            $profileImg = $this->request->getUploadedFiles();
+
+            foreach ($profileImg as $img) 
+            {
+                $formData['profile_img'] = $img->getClientFilename();
+                $targetPath = WWW_ROOT. 'img'. DS . 'Profiles'. DS. $img->getClientFilename();
+                $img->moveTo($targetPath);
+            }
+
+            if (empty($profileImg))
+            {
+                $user->firstname = $this->request->getData('firstname');
+                $user->surname = $this->request->getData('surname');
+                $user->email = $this->request->getData('email');
+            }
+
+            else
+            {
+                $user = $this->Users->patchEntity($user, $formData);
+            }
+
+            if ($this->Users->save($user))
+            {
+                $this->Flash->success("You have updated your profile!");
+            }
+
+            else
+            {
+                $this->Flash->error("There was an error updating your profile");
+            }
+        }
+
+        $this->set(['user' => $user, 'recentBookings' => $recentBookings]);
     }
 }

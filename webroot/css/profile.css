@@ -1,0 +1,59 @@
+.profileImg{
+	height: 250px;
+	width: 250px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.imgContainer{
+	flex: 30%;
+}
+
+.details{
+	flex: 90%;
+	align-self: center;
+}
+
+.edit{
+	display: none;
+}
+
+.cancelbtn{
+	display: none;
+	padding: 7.5px 15px;
+    background: #E30072;
+    border: 1px #E30072 solid;
+    border-radius:10px;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 7.5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.profileCard{
+	background-color: #f0f0f0;
+	border: 1px #525252 solid;
+	border-radius: 10px;
+	padding: 20px;
+	box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4);
+	margin-bottom: 3em;
+}
+
+.roomsImg{
+	height: 200px;
+	width: auto;
+}
+
+.recentBookingText{
+	font-size: 18px;
+	margin: 6px;
+}
+
+.card{
+	background-color: #f0f0f0;
+	border: 1px #525252 solid;
+	border-radius: 10px;
+	padding: 16px;
+	margin-bottom: 24px;
+}

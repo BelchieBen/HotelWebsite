@@ -83,8 +83,6 @@ class HotelsController extends AppController
 
 		 			// Applying the image name to the form data
 			 		$formData['hotel_img'] = $hotelImages;
-
-			 		//debug($formData);
 			 		
 			 		// Filling the enity with the form data
 			 		$hotel = $this->Hotels->patchEntity($hotel, $formData);
@@ -245,9 +243,7 @@ class HotelsController extends AppController
 	 			$hotel->hotel_name = $this->request->getData('hotel_name');
 	 			$hotel->description = $this->request->getData('description');
 	 			$hotel->tags = $this->request->getData('tags');
-	 			debug($hotel->tags);
 	 			$hotel->contact_number = $this->request->getData('contact_number');
-	 			debug($hotel);
 	 		}
 	 		else
 	 		{
@@ -263,8 +259,6 @@ class HotelsController extends AppController
 
 	 			// Applying the image name to the form data
 		 		$formData['hotel_img'] = $hotelImages;
-
-		 		//debug($formData);
 		 		
 		 		// Filling the enity with the form data
 		 		$hotel = $this->Hotels->patchEntity($hotel, $formData);

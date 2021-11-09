@@ -33,12 +33,31 @@ class RoomsController extends AppController
 		else
 		{
 			$hotel = $this->Hotels->newEmptyEntity();
+
+			$categories = [];
+			$categories += [
+				"Single" => "Single",
+				"Double" => "Double",
+				"King" => "King",
+				"Family" => "Family"
+			];
+
+			// Getting a list of hotel names to use in select input
+			$hotels = $this->Rooms->Hotels->find();
+			$hotels = $hotels->toArray();
+			$hotelNames = [];
+			foreach ($hotels as $hotel) 
+			{
+				$hotelNames += [$hotel->id => $hotel->hotel_name];
+			}
+
 			$room = $this->Rooms->newEmptyEntity();
+
 		 	if ($this->request->is('post'))
 		 	{
 		 		// Getting all the form data
 		 		$formData = $this->request->getData();
-
+		 
 		 		// Getting the from files
 		 		$roomImg = $this->request->getUploadedFiles();
 
@@ -61,8 +80,9 @@ class RoomsController extends AppController
 		 		// If there are no images uploaded leave hotel_img column empty
 		 		if (empty($roomImages))
 		 		{
-		 			$formData['hotel_img'] = $imgName;
+		 			$formData['room_img'] = $imgName;
 		 			$room = $this->Rooms->patchEntity($room, $formData);
+		 			$room['room_category'] = $formData['room_category'];
 		 		}
 		 		else
 		 		{	
@@ -83,6 +103,7 @@ class RoomsController extends AppController
 			 		
 			 		// Filling the enity with the form data
 			 		$room = $this->Rooms->patchEntity($room, $formData);
+			 		$room['room_category'] = $formData['room_category'];
 		 		}
 
 		 		if ($this->Rooms->save($room))
@@ -92,7 +113,7 @@ class RoomsController extends AppController
 		 		}
 		 		$this->Flash->error(__('Unable to save room '.$room->room_number.'.'));
 		 	}
-		 	$this->set(['room'=> $room, 'hotels' => $this->Rooms->Hotels->find()->select(['hotel_name'])]);
+		 	$this->set(['room'=> $room, 'hotelNames' => $hotelNames, 'categories' => $categories]);
 		}
 
 	 	
@@ -139,6 +160,7 @@ class RoomsController extends AppController
 	 			// Manually updating attributes to preserve image name in database
 	 			$room->room_number = $this->request->getData('room_number');
 	 			$room->room_category = $this->request->getData('room_category');
+	 			$room->rate = $this->request->getData('rate');
 	 		}
 	 		else
 	 		{
@@ -154,19 +176,18 @@ class RoomsController extends AppController
 
 	 			// Applying the image name to the form data
 		 		$formData['room_img'] = $roomImages;
-
-		 		//debug($formData);
 		 		
 		 		// Filling the enity with the form data
 		 		$room = $this->Rooms->patchEntity($room, $formData);
+		 		$room->room_category = $this->request->getData('room_category');
 	 		}
 	 		
 	 		if ($this->Rooms->save($room))
 	 		{
-	 			$this->Flash->success(__('You have updated room: '.$room->room_number.'.'));
+	 			$this->Flash->success(__('You have updated room: '.$room->roon_number.'.'));
                 return $this->redirect(['controller' => 'Admin', 'action' => 'index']);
 	 		}
-	 		$this->Flash->error(__('Unable to save room '.$room->room_number.'.'));
+	 		$this->Flash->error(__('Unable to save room '.$room->roon_number.'.'));
 	 	}
 	 	$this->set('room', $room);
 
