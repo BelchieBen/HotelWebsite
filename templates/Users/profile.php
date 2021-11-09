@@ -32,8 +32,9 @@
     <h1>Recent Bookings</h1>
     <?php foreach ($recentBookings as $booking) : ?>
         <div class="card">
-            <h2><?= $booking['hotel_name']?></h2>
-            <div class="row">
+            <h2 style="margin-bottom: 10px"><?= $booking['hotel_name']?></h2>
+            <p class="mb-1"><?= $booking['hotel_contact'] ?></p>
+            <div class="row mb-1">
                 <?php echo $this->Html->image('Rooms/'.$booking['room_img'], ['class' =>'roomsImg']) ?><br>
                 <div class="column ml-1">
                     <b class="recentBookingText">Booking reference: <?= $booking['booking_id'] ?></b>
@@ -41,9 +42,11 @@
                     <p class="recentBookingText"><?= $booking['room_category']?> Room</p>
                     <p class="recentBookingText">Check-in: <?= $booking['check_in'] ?></p>
                     <p class="recentBookingText">Check-out: <?= $booking['check_out'] ?></p>
+                    <p class="recentBookingText">Number of nights: <?= $booking['days'] ?></p>
                     <p class="recentBookingText">Total Paid £<?= $booking['total'] ?></p>
                 </div>
             </div>
+            <?= $this->Html->link("Cancel Booking", ['controller' => 'Bookings', 'action' => 'cancel', $booking['booking_id']],['class' => 'dangerBtn']) ?>
         </div>
     <?php endforeach ?>
 </div>

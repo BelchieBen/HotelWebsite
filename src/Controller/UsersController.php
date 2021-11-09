@@ -101,6 +101,7 @@ class UsersController extends AppController
         $rooms = [];
         foreach ($bookings as $booking) 
         {
+            $days = ($booking->booking_start)->diff($booking->booking_end)->days;
             $room = $this->Rooms->get($booking->room_id);
             $hotel = $this->Hotels->get($booking->hotel_id);
             $bookingArray = [
@@ -112,6 +113,8 @@ class UsersController extends AppController
                 'check_out' => $booking->booking_end,
                 'hotel_name' => $hotel->hotel_name,
                 'room_category' => $room->room_category,
+                'hotel_contact' => $hotel->contact_number,
+                'days' => $days,
             ];
             array_push($recentBookings, $bookingArray);
         }
