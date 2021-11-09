@@ -91,6 +91,18 @@ class WishlistsController extends AppController
 	{
 		$user = $this->request->getAttribute('identity');
 		$hotel = $this->Hotels->get($id);
+
+		// Check if the user has a wish list
+		$userWishList =  $this->WishLists->find()->where(['user_id' => $user->id]);
+		$userWishList = $userWishList->first();
+
+		if (is_null($userWishList))
+    	{
+    		$userWishList = $this->WishLists->newEmptyEntity();
+    		$userWishList->user_id = $user->id;
+    		$this->WishLists->save($userWishList);
+    	}
+
 		$wishList = $this->WishLists->find()->where(['user_id' => $user->id]);
 		$wishList = $wishList->first();
 
