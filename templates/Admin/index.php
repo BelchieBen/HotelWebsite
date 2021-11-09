@@ -32,6 +32,7 @@
 			</table>
 		</div>
 	</div>
+
 	<div class="col3">
 		<h1>Rooms</h1>
 		<div>
@@ -65,6 +66,39 @@
 			</table>
 		</div>
 	</div>
+
+	<div class="col3">
+		<h1>Bookings</h1>
+		<hr>
+		<div class="mt-2">
+			<table id="bookings" class="display">
+				<thead>
+					<tr>
+						<td>Booking Number</td>
+						<td>Hotel</td>
+						<td>Room</td>
+						<td>Customer</td>
+						<td>Check In</td>
+						<td>Check Out</td>
+						<td>Total</td>
+					</tr>
+				</thead>
+				<tbody>				
+					<?php foreach ($bookings as $booking): ?>
+						<tr>
+							<td><?= $booking->booking_id ?></td>
+							<td><?= $booking->hotel->hotel_name ?></td>
+							<td><?= $booking->room->roon_number ?></td>
+							<td><?= $booking->user_id ?></td>
+							<td><?= $booking->booking_start ?></td>
+							<td><?= $booking->booking_end ?></td>
+							<td>£<?= $booking->total ?></td>
+						</tr>
+					<?php endforeach ?>		
+					</tbody>
+			</table>
+		</div>
+	</div>
 </div>
 
 <script type="text/javascript">
@@ -74,5 +108,9 @@
 
 	$(document).ready( function () {
     $('#rooms').DataTable();
+} );
+
+	$(document).ready( function () {
+    $('#bookings').DataTable();
 } );
 </script>

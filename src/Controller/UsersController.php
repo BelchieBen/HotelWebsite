@@ -93,7 +93,7 @@ class UsersController extends AppController
     {
         $currentlyLoggedInUser = $this->request->getAttribute('identity');
         $user = $this->Users->get($currentlyLoggedInUser->id);
-        $bookings = $this->Bookings->find()->where(['user_id' => $user->id]);
+        $bookings = $this->Bookings->find()->where(['user_id' => $user->id])->order(['date_booked' => 'DESC']);
         $bookings = $bookings->toArray();
 
         $recentBookings = [];

@@ -9,6 +9,7 @@ class BookingsTable extends Table
 {
     public function initialize(array $config): void
     {
-    	$this->hasOne('Rooms');
+    	$this->belongsTo('Rooms');
+        $this->belongsTo('Hotels');
     }
 }
