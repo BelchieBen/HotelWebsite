@@ -15,26 +15,14 @@
                     <p class="mb-1"><?= $hotel['hotel_contact'] ?></p>
                     <div class="row mb-1">
                         <div class="column">
-                            <div class="slideshowContainer">
+                            <div>
                                 <?php 
                                     $imgArray = explode(",",$hotel['hotel_img']);
-                                    foreach ($imgArray as $index => $image): ?>
-                                        <div class="slideshow fade">
-                                            <div class="imageIndex"><?= $index ?>/ <?= count($imgArray) ?></div>
-                                            <?php 
-                                                echo $this->Html->image('Hotels/'.$image, ['class' =>'hotelWishImg']) 
-                                            ?>
-                                        </div>
-                                    <?php endforeach ?>
-                                    <a class="prev" onclick="moveSlide(-1)">&#10094;</a>
-                                    <a class="next" onclick="moveSlide(1)">&#10095;</a>
+                                    echo $this->Html->image('Hotels/'.$imgArray[0], ['class' =>'hotelWishImg']) 
+                                    ?>
                             </div>
-                            <div class="dots">
-                                <span class="dot" onclick="currentSlide(1)"></span>
-                                <span class="dot" onclick="currentSlide(2)"></span>
-                                <span class="dot" onclick="currentSlide(3)"></span>
+                            
                             </div>
-                        </div>
                         <div class="column ml-1">
                             <h3 class="recentBookingText">Description</h3>
                             <p class="recentBookingText"><?= $hotel['description']?></p>
@@ -51,8 +39,3 @@
                 </div>
             <?php endforeach ?>
     <?php endif ?>
-
-<script type="text/javascript">
-    var slideIndex = 1;
-    showSlides(slideIndex);
-</script>
