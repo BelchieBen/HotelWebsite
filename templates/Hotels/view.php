@@ -19,6 +19,9 @@
 		  <span class="dot" onclick="currentSlide(2)"></span>
 		  <span class="dot" onclick="currentSlide(3)"></span>
 		</div>
+		<div class="mt-2">
+			<?= $this->Html->link("Add hotel to wish list", ['controller' => 'WishLists', 'action' => 'add', $hotel->id],['class' => 'ideagenBtn']) ?>
+		</div>
 
 		
 	</div>

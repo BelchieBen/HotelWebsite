@@ -106,8 +106,33 @@ legend {
     text-decoration: none;
 }
 
+.smallIdeagenBtn{
+    padding: 7.5px 15px;
+    background: teal;
+    border: 1px #006d6d solid;
+    border-radius:10px;
+    color: white;
+    text-decoration: none;
+    width: fit-content;
+}
+
+.smallIdeagenBtnDanger{
+    padding: 7.5px 15px;
+    background: #E30072;
+    border: 1px #E30072 solid;
+    border-radius:10px;
+    color: white;
+    text-decoration: none;
+    width: fit-content;
+}
+
 .ideagenBtn:hover{
     text-decoration: none;
+}
+
+.rowSpaceBetween{
+    display: flex;
+    justify-content: space-between;
 }
 
 .bottombtn{
@@ -128,6 +153,12 @@ legend {
 
 .roomImg{
     width: 400px;
+    object-fit: cover;
+}
+
+.hotelWishImg{
+    width: 250px;
+    height: auto;
     object-fit: cover;
 }
 
