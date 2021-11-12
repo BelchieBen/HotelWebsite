@@ -21,4 +21,9 @@ class HomeController extends AppController
 		$hotels = $this->Paginator->paginate($this->Hotels->find());
 		$this->set(compact('hotels'));
 	}
+
+	public function report()
+	{
+		
+	}
 }

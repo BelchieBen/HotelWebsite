@@ -57,6 +57,7 @@ $title = 'Hotel Website';
                 <li class="item"><?= $this->Html->link('Wish List',['controller' => 'wishlists', 'action' => 'index']) ?></li>
 
             <?php endif ?>
+            <li class="item"><?= $this->Html->link('Report',['controller' => 'home', 'action' => 'report']) ?></li>
             </li>
             <?php if (is_null($this->request->getAttribute('identity'))): ?>
                 <li class="item button"><?= $this->Html->link('Log In',['controller' => 'users', 'action' => 'login']) ?></li>

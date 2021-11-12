@@ -150,7 +150,7 @@ class HotelsController extends AppController
 			$toDate = end($newDates);
 
 			echo("<h3>Available Rooms</h3><hr>");
-			echo("<div class='row'>");
+			echo("<div class='roomsrow'>");
 
 			// Comparing users date selection to all rooms booking dates to determine what rooms are available
 			

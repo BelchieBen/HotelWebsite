@@ -1,9 +1,9 @@
 $(function() {
     $(".toggle").on("click", function() {
-        if ($(".item").hasClass("active")) {
-            $(".item").removeClass("active");
+        if ($(".item").hasClass("show")) {
+            $(".item").removeClass("show");
         } else {
-            $(".item").addClass("active");
+            $(".item").addClass("show");
         }
     });
 });

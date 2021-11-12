@@ -54,7 +54,7 @@ a:hover {
   order: 3;
   display: none;
 }
-.item.active {
+.item.show {
   display: block;
 }
 

@@ -35,7 +35,6 @@ hr{
 
 .cardrow3{
     flex: 33%;
-    height: 38.25vh;
     margin: 16px;
 }
 
@@ -129,6 +128,21 @@ hr{
     margin-right: auto;
 }
 
+.justify{
+    text-align: justify;
+}
+
+.reportParag{
+    padding: 16px;
+    flex: 50%;
+}
+
+.Citations{
+    padding-left: 16px;
+}
+
+
+
 /* Tablet menu */
 @media all and (min-width: 468px) {
     .row {
@@ -147,6 +161,12 @@ hr{
         display: flex;
         flex-direction: row;
     }
+
+    .roomsrow{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
     .col1{
         flex: 30%;
         height: 100%;
@@ -156,5 +176,13 @@ hr{
         flex:70%;
         height: 100%;
         margin: 12px;
+    }
+
+    .hotelImg {
+        max-height: 100%;
+        max-width: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+        height: 38.42vh;
     }
 }
