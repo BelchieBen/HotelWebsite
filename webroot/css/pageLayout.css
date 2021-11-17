@@ -23,6 +23,10 @@ hr{
     flex-direction: column;
     }
 
+.file{
+    margin-top: 2em;
+}
+
 .smallCol{
     flex: 12.5%;
     margin: 16px;

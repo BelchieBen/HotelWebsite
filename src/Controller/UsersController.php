@@ -156,4 +156,22 @@ class UsersController extends AppController
 
         $this->set(['user' => $user, 'recentBookings' => $recentBookings]);
     }
+
+    public function changePassword()
+    {
+        $currentlyLoggedInUser = $this->request->getAttribute('identity');
+        $user = $this->Users->get($currentlyLoggedInUser->id);
+
+        if ($this->request->is(['post','put']))
+        {
+            $formData = $this->request->getData();
+            $user = $this->Users->patchEntity($user, $formData);
+
+            if ($this->Users->save($user))
+            {
+                $this->Flash->success("You have successfully changed your password");
+                return $this->redirect(['action' => 'profile']);
+            }
+        }
+    }
 }

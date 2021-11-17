@@ -20,6 +20,7 @@
             <?= $this->Form->control('firstname') ?>
             <?= $this->Form->control('surname') ?>
             <?= $this->Form->control('email') ?>
+            <?= $this->Html->link("Change Password", ['action' => 'changePassword'],['class' => 'ideagenBtn']) ?>
             <?= $this->Form->control('profile_img',['label' => 'Images', 'type' =>'file','accept' => 'image/png , image/jpeg']) ?>
             <!-- Need to allow for multiple file uploads -->
        </fieldset>
