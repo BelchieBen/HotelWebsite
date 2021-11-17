@@ -30,7 +30,7 @@ class UsersController extends AppController
         $result = $this->Authentication->getResult();
         // regardless of POST or GET, redirect if user is logged in
         if ($result->isValid()) {
-            // redirect to /articles after login success
+            // redirect to /home after login success
             $redirect = $this->request->getQuery('redirect', [
                 'controller' => 'Home',
                 'action' => 'index',
