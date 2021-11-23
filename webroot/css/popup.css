@@ -21,7 +21,7 @@
 }
 
 
-.close {
+.close, .closeUp, .closeDel {
   color: #aaaaaa;
   float: right;
   font-size: 28px;
@@ -29,7 +29,11 @@
 }
 
 .close:hover,
-.close:focus {
+.close:focus,
+.closeUp:hover,
+.closeUp:focus,
+.closeDel:hover,
+.closeDel:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;

@@ -121,6 +121,19 @@ hr{
     cursor: pointer;
 }
 
+.delUsrbtn{
+    padding: 7.5px 15px;
+    background: #E30072;
+    border: 1px #E30072 solid;
+    border-radius:10px;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 7.5px;
+    font-size: 16px;
+    display: block;
+    cursor: pointer;
+}
+
 .redbtn:hover{
     text-decoration: none;
 }
@@ -139,6 +152,72 @@ hr{
 .reportParag{
     padding: 16px;
     flex: 50%;
+}
+
+.padd16{
+    padding: 16px;
+}
+
+.usrBox{ 
+    background-blend-mode: overlay;
+    flex: 35%;
+    height: 300px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 16px;
+}
+
+.adduser{
+    background-image: url('/HotelWebsite/img/Background/adduser.jpg'), linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.25));
+}
+
+.addusr{
+    background: teal;
+    border: 1px teal; solid;
+}
+
+.updusr{
+    background: #ffd412;
+    border: 1px #ffd412; solid;
+    cursor: pointer;
+}
+
+.delusr{
+    background: #E30072;
+    border: 1px #E30072; solid;
+    cursor: pointer;
+}
+
+.updateuser{
+    background-image: url('/HotelWebsite/img/Background/updateuser.jpg'), linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.25));
+}
+
+.deleteuser{
+    background-image: url('/HotelWebsite/img/Background/deleteuser.jpg'), linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.25));
+}
+
+
+
+.userimg{
+    object-fit: cover;
+}
+
+.h1text{
+    font-size: 28px;
+    margin-bottom: 0;
+    color: white;
+    text-decoration: none;
+    padding: 7.5px 15px;
+    border-radius:10px;
+    color: white;
+    text-decoration: none;
+    margin-bottom: 7.5px;
+}
+
+.h1text:hover{
+    text-decoration: none;
 }
 
 .Citations{

@@ -99,6 +99,84 @@
 			</table>
 		</div>
 	</div>
+
+	<div class="col3">
+		<h1>Users</h1>
+		<hr>
+		<div class="row mt-2">
+			<div class="adduser usrBox">
+				<?= $this->Html->link("Add Users", ['controller' => 'Users','action' => 'add'],['class' => 'addusr h1text']) ?>
+			</div>
+			<div class="updateuser usrBox">
+				<button id="openTable" class="updusr h1text">Update Users</button>
+			</div>
+			<div class="deleteuser usrBox">
+				<button id="openTableDel" class="delusr h1text">Delete Users</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- Popup window showing all users -->
+		<div id="usersPopup" class="popup popupFade">
+		  <div class="popupContent padd16">
+		    <span class="closeUp">&times;</span>
+		    <div style="margin:16px">
+		    	<table id="users" class="display">
+					<thead>
+						<tr>
+							<td>Firstname</td>
+							<td>Surname</td>
+							<td>Email</td>
+							<td>Action</td>
+						</tr>
+					</thead>
+					<tbody>				
+						<?php foreach ($users as $usr): ?>
+							<tr>
+								<td><?= $usr->firstname ?></td>
+								<td><?= $usr->surname ?></td>
+								<td><?= $usr->email ?></td>
+								<td>
+									<?= $this->Html->link("Update User", ['controller' => 'Users', 'action' => 'update', $usr['id']],['class' => 'yellowbtn']) ?>
+								</td>
+							</tr>
+						<?php endforeach ?>		
+						</tbody>
+				</table>
+	    	</div>
+		  </div>
+	  	</div>
+
+	  	<!-- Popup window showing all users -->
+		<div id="usersPopupDel" class="popup popupFade">
+		  <div class="popupContent padd16">
+		    <span class="closeDel">&times;</span>
+		    <div style="margin:16px">
+		    	<table id="usersDel" class="display">
+					<thead>
+						<tr>
+							<td>Firstname</td>
+							<td>Surname</td>
+							<td>Email</td>
+							<td>Action</td>
+						</tr>
+					</thead>
+					<tbody>				
+						<?php foreach ($users as $usr): ?>
+							<tr>
+								<td><?= $usr->firstname ?></td>
+								<td><?= $usr->surname ?></td>
+								<td><?= $usr->email ?></td>
+								<td>
+									<?= $this->Html->link("Delete User", ['controller' => 'Users', 'action' => 'delete', $usr['id']],['class' => 'delUsrbtn']) ?>
+								</td>
+							</tr>
+						<?php endforeach ?>		
+						</tbody>
+				</table>
+	    	</div>
+		  </div>
+	  	</div>
 </div>
 
 <script type="text/javascript">
@@ -113,4 +191,12 @@
 	$(document).ready( function () {
     $('#bookings').DataTable();
 } );
+	$(document).ready( function () {
+    $('#users').DataTable().columns.adjust();
+} );
+	$(document).ready( function () {
+    $('#usersDel').DataTable().columns.adjust();
+} );
+	showUsersPopup();
+	showUsersPopupDel();
 </script>

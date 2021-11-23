@@ -89,6 +89,34 @@ class UsersController extends AppController
         $this->set('user', $user);
     }
 
+    public function add()
+    {
+        $user = $this->Users->newEmptyEntity();
+        if ($this->request->is('post')) {
+            $user = $this->Users->patchEntity($user, $this->request->getData());
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('The user has been saved.'));
+                return $this->redirect(['controller' => 'Admin','action' => 'index']);
+            }
+            $this->Flash->error(__('Unable to add the user.'));
+        }
+        $this->set('user', $user);
+    }
+
+     public function update($id=null)
+    {
+        $user = $this->Users->get($id);
+        if ($this->request->is(['post', 'put'])) {
+            $user = $this->Users->patchEntity($user, $this->request->getData());
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('The user has been updated.'));
+                return $this->redirect(['controller' => 'Admin','action' => 'index']);
+            }
+            $this->Flash->error(__('Unable to add the user.'));
+        }
+        $this->set('user', $user);
+    }
+
     public function profile()
     {
         $currentlyLoggedInUser = $this->request->getAttribute('identity');
@@ -173,5 +201,26 @@ class UsersController extends AppController
                 return $this->redirect(['action' => 'profile']);
             }
         }
+    }
+
+    public function delete($id=null)
+    {
+        if ($this->request->getAttribute('identity')['role'] != 'admin')
+        {
+            $this->Flash->error(__('You are not authorized to visit this page'));
+            $this->redirect(['controller' => 'Home','action' => 'index']);
+        }
+        $user = $this->Users->get($id);
+        if ($this->request->is(['post','put']))
+        {
+
+            if ($this->Users->delete($user))
+            {
+                $this->Flash->success("You have removed ".$user->firstname);
+                return $this->redirect(['controller' => 'Admin','action' => 'index']);
+            }
+            $this->Flash->error("Unable to remove ".$user->firstname);
+        }
+        $this->set('user', $user);
     }
 }

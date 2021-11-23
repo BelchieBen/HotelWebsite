@@ -71,3 +71,43 @@ function getIntermediateDates(startDate, endDate)
 
     return dates;
 };
+
+function showUsersPopup() {
+	var modal = document.getElementById("usersPopup");
+	var btn = document.getElementById("openTable");
+	var span = document.getElementsByClassName("closeUp")[0];
+
+	btn.onclick = function() {
+	  modal.style.display = "block";
+	}
+
+	span.onclick = function() {
+	  modal.style.display = "none";
+	}
+
+	window.onclick = function(event) {
+	  if (event.target == modal) {
+	    modal.style.display = "none";
+  		}
+	}
+}
+
+function showUsersPopupDel() {
+	var modal = document.getElementById("usersPopupDel");
+	var btn = document.getElementById("openTableDel");
+	var span = document.getElementsByClassName("closeDel")[0];
+
+	btn.onclick = function() {
+	  modal.style.display = "block";
+	}
+
+	span.onclick = function() {
+	  modal.style.display = "none";
+	}
+
+	window.onclick = function(event) {
+	  if (event.target == modal) {
+	    modal.style.display = "none";
+  		}
+	}
+}

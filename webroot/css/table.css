@@ -29,3 +29,7 @@ thead, td{
     color: white;
     text-decoration: none;
 }
+
+#users, #usersDel{
+    width: 100% !important;
+}
