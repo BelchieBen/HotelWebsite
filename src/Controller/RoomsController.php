@@ -108,7 +108,7 @@ class RoomsController extends AppController
 
 		 		if ($this->Rooms->save($room))
 		 		{
-		 			$this->Flash->success(__('Room: '.$room->room_number.' has been added.'));
+		 			$this->Flash->success(__('Room: '.$room->roon_number.' has been added.'));
 	                return $this->redirect(['controller' => 'Admin', 'action' => 'index']);
 		 		}
 		 		$this->Flash->error(__('Unable to save room '.$room->room_number.'.'));

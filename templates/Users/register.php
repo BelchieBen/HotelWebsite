@@ -10,5 +10,5 @@
    </fieldset>
     <?= $this->Form->button(__('Submit')); ?>
     <?= $this->Form->end() ?>
-    <?= $this->Html->link("Have an account?", ['action' => 'register'],['class' => 'ideagenLink']) ?>
+    <?= $this->Html->link("Have an account?", ['action' => 'login'],['class' => 'ideagenLink']) ?>
 </div>

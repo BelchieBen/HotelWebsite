@@ -15,9 +15,9 @@
   			<a class="next" onclick="moveSlide(1)">&#10095;</a>
 		</div>
 		<div class="dots">
-		  <span class="dot" onclick="currentSlide(1)"></span>
-		  <span class="dot" onclick="currentSlide(2)"></span>
-		  <span class="dot" onclick="currentSlide(3)"></span>
+		<?php foreach ($imgArray as $index => $image): ?>
+		  	<span class="dot"></span>
+		  <?php endforeach ?>
 		</div>
 		<div class="mt-2">
 			<?= $this->Html->link("Add hotel to wish list", ['controller' => 'WishLists', 'action' => 'add', $hotel->id],['class' => 'ideagenBtn']) ?>

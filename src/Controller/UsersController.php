@@ -151,15 +151,20 @@ class UsersController extends AppController
         {
             $formData = $this->request->getData();
             $profileImg = $this->request->getUploadedFiles();
+            $filename = $formData['profile_img']->getClientFilename();
 
-            foreach ($profileImg as $img) 
+            if (!empty($formData['profile_img']->getClientFilename()))
             {
-                $formData['profile_img'] = $img->getClientFilename();
-                $targetPath = WWW_ROOT. 'img'. DS . 'Profiles'. DS. $img->getClientFilename();
-                $img->moveTo($targetPath);
+                foreach ($profileImg as $img) 
+                {
+                    debug($formData['profile_img']->getClientFilename());
+                    $formData['profile_img'] = $img->getClientFilename();
+                    $targetPath = WWW_ROOT. 'img'. DS . 'Profiles'. DS. $img->getClientFilename();
+                    $img->moveTo($targetPath);
+                }
             }
 
-            if (empty($profileImg))
+            if (empty($filename))
             {
                 $user->firstname = $this->request->getData('firstname');
                 $user->surname = $this->request->getData('surname');
