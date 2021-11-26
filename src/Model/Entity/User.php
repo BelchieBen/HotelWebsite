@@ -13,7 +13,7 @@ class User extends Entity
         'id' => false
     ];
 
-    // ...
+    // The set password fucntion hashes the password before it gets written to the database 
 
     protected function _setPassword($password)
     {

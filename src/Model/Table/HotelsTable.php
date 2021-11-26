@@ -10,8 +10,11 @@ class HotelsTable extends Table
 
     public function initialize(array $config):void
     {
+        // Specifying relationships
         $this->hasMany('Rooms');
     }
+
+    // Validating the uploaded files, this ensures no harmful files get uploaded
 	public function validationDefault(Validator $validator): Validator
 	{
 		return $validator

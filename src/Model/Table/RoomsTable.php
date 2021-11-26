@@ -10,10 +10,13 @@ class RoomsTable extends Table
 
     public function initialize(array $config):void
     {
+        // Specifying relationships
         $this->hasOne('RoomCategory', ['className' => 'RoomsCategories']);
         $this->hasMany('Bookings');
         $this->belongsTo('Hotels');
     }
+
+    // Validating the uploaded files to ensure no harmful files get uploaded
 	public function validationDefault(Validator $validator): Validator
 	{
 		return $validator
