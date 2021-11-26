@@ -25,6 +25,7 @@ class RoomsController extends AppController
                 'action' => 'index',
             ]);
 
+	 	// Checking if the user is an admin, this function is for admins only. If the user isnt an admin they will be redirected and shown an error
 	 	if ($this->request->getAttribute('identity')['role'] != 'admin')
 		{
 			$this->Flash->error(__('You are not authorized to visit this page'));
@@ -32,6 +33,7 @@ class RoomsController extends AppController
 		}
 		else
 		{
+			// Creating a new hotel object
 			$hotel = $this->Hotels->newEmptyEntity();
 
 			$categories = [];

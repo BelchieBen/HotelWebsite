@@ -1,6 +1,7 @@
 <h1>Hotels</h1>
 <p>Find your perfect holiday in one of our amazing hotels!</p>
 <div class="row">
+	<!-- Looping though each hotel to display it -->
 	<?php foreach ($hotels as $hotel): ?>
 		<div class="cardrow3">
 			<?php 

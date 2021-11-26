@@ -76,4 +76,29 @@
 			</p>
 		</div>
 	</div>
+
+	<h1 style="margin-bottom:0px; margin-top: 24px;">Works used in this website</h1>	
+	<hr>
+	<div class="row justify">
+
+		<div class="reportParag column">
+			<p style="padding-bottom: 16px;">
+				To develop this website I used a framework called <a href="https://cakephp.org/">CakePHP</a> and I chose to use this framework as its lightweight, easy to learn and provided a good MVC structure to build upon. Any files that are made by CakePHP have their copyright on them and all other files such as <b>Models</b>, <b>View Files</b>, <b>Controllers</b>, <b>Javascript</b> and <b>CSS</b> are my own work. </p>
+
+			<p style="padding-bottom: 16px;">To help me learn the CakePHP framework I often referred to: </p>
+				<ol class="Citations">
+					<li>CakePHP's <a href="https://book.cakephp.org/4/en/index.html">documentation</a></li>
+					<li>PHP's <a href="https://www.php.net/docs.php">documentation</a></li>
+				</ol>
+				<p style="padding-bottom: 16px; padding-top: 16px;">
+				I looked at the regular PHP documentation for help understanding concepts already handled by CakePHP, such as file uploads.</p>
+			<br>
+			<br>
+		</div>
+		<div class="reportParag column">
+			<p style="padding-bottom: 16px;">
+				Aside from using the CakePHP and PHP doc's the only other external resource I used was w3schools article on how to build a slideshow which can be found <a href="https://www.w3schools.com/howto/howto_js_slideshow.asp">here</a></p>
+			<br> 
+		</div>
+	</div>
 </div>

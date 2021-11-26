@@ -18,6 +18,7 @@ class HomeController extends AppController
 
 	public function index()
 	{
+		// Getting all hotels to display
 		$hotels = $this->Paginator->paginate($this->Hotels->find());
 		$this->set(compact('hotels'));
 	}

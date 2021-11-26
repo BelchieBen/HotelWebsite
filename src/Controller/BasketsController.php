@@ -10,6 +10,7 @@ class BasketsController extends AppController
 	{
 		parent::initialize();
 
+		// Loading required database models
 		$room =  $this->loadModel('Rooms');
 		$basket = $this->loadModel('Baskets');
 		$basketItems = $this->loadModel('BasketItems');
@@ -25,6 +26,7 @@ class BasketsController extends AppController
                 'action' => 'index',
             ]);
 
+		// Validation to ensure a user is logged in to view their basket, this prevents database errors
 	 	if (is_null($user))
 		{
 			$this->Flash->error(__('You need to log in to view your basket'));
@@ -62,6 +64,7 @@ class BasketsController extends AppController
 					$customArr = [];
 					foreach ($room as $r) 
 					{
+						// Creating a custom array to pass to view file, making it easier to display the data
 						$customArr += [
 							"item_id" => $item_id,
 							"roon_id" => $r->roon_id, 
@@ -85,11 +88,12 @@ class BasketsController extends AppController
 
 	public function remove($id=null)
 	{
+		// Get the users backet item from the id passed in from the URL paramaters
 		$basketItem = $this->BasketItems->get($id);
 
     	if ($this->request->is(['post','put']))
     	{
-
+    		// The delete function returns a bool value so if deletion is successful redirect & show notification
     		if ($this->BasketItems->delete($basketItem))
     		{
     			$this->Flash->success("You have removed an item from your basket");

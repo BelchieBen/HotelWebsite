@@ -1,12 +1,15 @@
 
-<div class="mb-1 mt-3">    
+<div class="mb-1 mt-3">  
+  <!-- Creating the form in the CakePHP way -->
     <?= $this->Form->create($hotel , ['type' => 'file', 'name' => 'addHotel', 'id' => 'addHotel']) ?>
     <fieldset>
         <legend><?= __('Add a  hotel') ?></legend>
+        <!-- The form control links to a field in the database model -->
         <?= $this->Form->control('hotel_name',['required']) ?>
         <?= $this->Form->control('description',['required']) ?>
         <div class="input-categories">
           <?= $this->Form->control('tags', ['type' => 'text', 'required']) ?>
+          <!-- Shwoing the hotel tags -->
           <ul id="tagList">
           </ul>
         </div>  
@@ -19,5 +22,6 @@
 </div>
 
 <script type="text/javascript">
+  // Adding the tags via JavaScript
   addTags();
 </script>

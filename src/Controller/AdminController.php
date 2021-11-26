@@ -16,12 +16,14 @@ class AdminController extends AppController
                 'action' => 'index',
             ]);
 
+		// Redirect the user if they arent the admin, this is done in initialize so it applied for all functions in the class
 		if ($this->request->getAttribute('identity')['role'] != 'admin')
 		{
 			$this->Flash->error(__('You are not authorized to visit this page'));
         	$this->redirect($redirect);
 		}
 
+		// Loading required database models
 		$hotel =  $this->loadModel('Hotels');
 		$room =  $this->loadModel('Rooms');
 		$booking =  $this->loadModel('Bookings');

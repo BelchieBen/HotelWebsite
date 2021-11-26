@@ -1,4 +1,5 @@
 <div class="mb-1 mt-3">    
+  <!-- Creating form with a type file so it accepts the images -->
     <?= $this->Form->create($hotel , ['type' => 'file', 'name' => 'addHotel', 'id' => 'addHotel']) ?>
     <fieldset>
         <legend><?= __('Add a  hotel') ?></legend>
@@ -9,6 +10,7 @@
           <ul id="tagList">
             <?php $tags = explode(",", $hotel->tags) ?>
 
+            <!-- Looping through the tags to display them -->
             <?php foreach ($tags as $t): ?>
                 <li class="tags pointer" onclick="removeTag(this)"><?= $t ?></li>
             <?php endforeach ?>

@@ -77,8 +77,10 @@ class UsersController extends AppController
 
     public function register()
     {
+        // Creating a new users object
         $user = $this->Users->newEmptyEntity();
         if ($this->request->is('post')) {
+            // Calling patch entity will apply the formdata to the new object
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
@@ -89,8 +91,15 @@ class UsersController extends AppController
         $this->set('user', $user);
     }
 
+    // This method of adding a user is only applied for admins
     public function add()
     {
+        // Checking if the user is an admin, this function is for admins only. If the user isnt an admin they will be redirected and shown an error
+        if ($this->request->getAttribute('identity')['role'] != 'admin')
+        {
+            $this->Flash->error(__('You are not authorized to visit this page'));
+            $this->redirect(['controller' => 'Home', 'action' => 'index']);
+        }
         $user = $this->Users->newEmptyEntity();
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
@@ -103,8 +112,16 @@ class UsersController extends AppController
         $this->set('user', $user);
     }
 
+    // This method of adding a user is only applied for admins
      public function update($id=null)
     {
+        // Checking if the user is an admin, this function is for admins only. If the user isnt an admin they will be redirected and shown an error
+        if ($this->request->getAttribute('identity')['role'] != 'admin')
+        {
+            $this->Flash->error(__('You are not authorized to visit this page'));
+            $this->redirect(['controller' => 'Home', 'action' => 'index']);
+        }
+        // Getting the user from the ID passed in the URL params
         $user = $this->Users->get($id);
         if ($this->request->is(['post', 'put'])) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
@@ -132,6 +149,7 @@ class UsersController extends AppController
             $days = ($booking->booking_start)->diff($booking->booking_end)->days;
             $room = $this->Rooms->get($booking->room_id);
             $hotel = $this->Hotels->get($booking->hotel_id);
+            // Creating a custom array from multiple data models to easily display the data on the profile page
             $bookingArray = [
                 'room_number' => $room->roon_number,
                 'room_img' => $room->room_img,
@@ -149,10 +167,12 @@ class UsersController extends AppController
 
         if ($this->request->is(['post', 'put']))
         {
+            // Getting data from a profile change
             $formData = $this->request->getData();
             $profileImg = $this->request->getUploadedFiles();
             $filename = $formData['profile_img']->getClientFilename();
 
+            // If the user has changed thier profile picture
             if (!empty($formData['profile_img']->getClientFilename()))
             {
                 foreach ($profileImg as $img) 
@@ -164,6 +184,7 @@ class UsersController extends AppController
                 }
             }
 
+            // If they havent changed thir profile picture, only update the nessessary attributes
             if (empty($filename))
             {
                 $user->firstname = $this->request->getData('firstname');
@@ -173,6 +194,7 @@ class UsersController extends AppController
 
             else
             {
+                // Follows on from user changing thier profile picture
                 $user = $this->Users->patchEntity($user, $formData);
             }
 
@@ -197,6 +219,7 @@ class UsersController extends AppController
 
         if ($this->request->is(['post','put']))
         {
+            // Get the new password from the form
             $formData = $this->request->getData();
             $user = $this->Users->patchEntity($user, $formData);
 

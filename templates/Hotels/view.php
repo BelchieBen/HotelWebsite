@@ -1,5 +1,6 @@
 <div class="row">
 	<div class="col1">
+		<!-- I used w3Schools documentation https://www.w3schools.com/howto/howto_js_slideshow.asp to help me buid this slideshow -->
 		<div class="slideshowContainer">
 		<?php 
 			$imgArray = explode(",",$hotel->hotel_img);
@@ -25,6 +26,7 @@
 
 		
 	</div>
+	<!-- Description & Details column -->
 	<div class="col2">
 		<h3><?= $hotel->hotel_name ?></h3>
 
@@ -61,7 +63,7 @@
 </div>
 
 
-
+<!-- Javascript functions to show the slideshow & send the users dates to the server for processing -->
 <script type="text/javascript">
 	var slideIndex = 1;
   	showSlides(slideIndex);
@@ -73,7 +75,6 @@
 		var id = url.substring(url.lastIndexOf('/') + 1);
 		$.ajax({
 			type: 'POST',
-			//url: '/HotelWebsite/hotels/view/'+id,
 			data: {datesUserSelected},
 			headers: {
 			'X-CSRF-Token': "<?= $this->request->getAttribute('csrfToken'); ?>"
@@ -81,7 +82,6 @@
 		 	success: function(response){
 		 		console.log(response);
 		 		$('.popupContent').append(response);
-		 		//$("<p>"+response+"</p>").replaceAll("html")
 		 		$('.popupContent').show(response);
 
 		 	}

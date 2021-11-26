@@ -1,3 +1,4 @@
+<!-- The profile card -->
 <div class="profileCard">
     <div class="row">
         <div class="imgContainer">
@@ -11,6 +12,7 @@
             <?php endif ?>
         </div>
     </div>
+    <!-- Buttons to show/ hide hidden content (Edit profile details) -->
     <button id="edit" class="yellowbtn mt-3">Edit Details</button>
     <button id="cancel" class="cancelbtn mt-3">Cancel</button>
     <div id="edit_profile" class="mb-1 mt-3 edit">    
@@ -29,6 +31,7 @@
     </div> 
 </div>
 
+<!-- Container for recent bookings -->
 <div>
     <h1>Recent Bookings</h1>
     <?php foreach ($recentBookings as $booking) : ?>
@@ -52,4 +55,5 @@
     <?php endforeach ?>
 </div>
 
+<!-- JavaScript to open/ close the edit profile details -->
 <script type="text/javascript">editProfile()</script>

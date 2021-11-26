@@ -10,6 +10,7 @@ class WishlistsController extends AppController
 	{
 		parent::initialize();
 
+		// Loading the required data model
 		$room =  $this->loadModel('Rooms');
 		$wishlist = $this->loadModel('WishLists');
 		$wishlistitems = $this->loadModel('WishListItems');
@@ -27,6 +28,7 @@ class WishlistsController extends AppController
                 'action' => 'index',
             ]);
 
+		// If no user is logged in, redirect them and show an error
 	 	if (is_null($user))
 		{
 			$this->Flash->error(__('You need to log in to view your wish list'));
@@ -40,6 +42,7 @@ class WishlistsController extends AppController
 
 			if (is_null($userWishList))
 	    	{
+	    		// Create a new wishlist if the user doesnt have one
 	    		$userWishList = $this->WishLists->newEmptyEntity();
 	    		$userWishList->user_id = $user->id;
 	    		$this->WishLists->save($userWishList);
@@ -69,6 +72,7 @@ class WishlistsController extends AppController
 					$customArr = [];
 					foreach ($hotel as $h) 
 					{
+						// Creating a custom array to easily display data on the webpage
 						$customArr += [
 							"item_id" => $item_id,
 							"hotel_id" => $h->id,
@@ -98,6 +102,7 @@ class WishlistsController extends AppController
 
 		if (is_null($userWishList))
     	{
+    		// Creating a wishlist if the user doesnt have one
     		$userWishList = $this->WishLists->newEmptyEntity();
     		$userWishList->user_id = $user->id;
     		$this->WishLists->save($userWishList);
@@ -106,6 +111,7 @@ class WishlistsController extends AppController
 		$wishList = $this->WishLists->find()->where(['user_id' => $user->id]);
 		$wishList = $wishList->first();
 
+		// Creating the wishlist & adding the requested hotel to that list
 		$wishListItem = $this->WishListItems->newEmptyEntity();
 		$wishListItem->hotel_id = $hotel->id;
 		$wishListItem->wish_list_id = $wishList->wish_list_id;

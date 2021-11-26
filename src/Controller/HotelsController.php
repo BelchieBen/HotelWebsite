@@ -13,6 +13,7 @@ class HotelsController extends AppController
 	{
 		parent::initialize();
 
+		// Loading required database models
 		$room =  $this->loadModel('Rooms');
 		$booking = $this->loadModel('Bookings');
 		$basket = $this->loadModel('Baskets');
@@ -31,6 +32,7 @@ class HotelsController extends AppController
                 'action' => 'index',
             ]);
 
+	 	// Ensuring that the user is an admin before allowing them onto the page as this is an admin only function
 	 	if ($this->request->getAttribute('identity')['role'] != 'admin')
 		{
 			$this->Flash->error(__('You are not authorized to visit this page'));
@@ -38,6 +40,7 @@ class HotelsController extends AppController
 		}
 		else
 		{
+			// Creating new hotel object
 			$hotel = $this->Hotels->newEmptyEntity();
 		 	if ($this->request->is('post'))
 		 	{
@@ -87,7 +90,7 @@ class HotelsController extends AppController
 			 		// Filling the enity with the form data
 			 		$hotel = $this->Hotels->patchEntity($hotel, $formData);
 		 		}
-
+		 		// The save function returns a bool value so if the save is successful redirect & show notification
 		 		if ($this->Hotels->save($hotel))
 		 		{
 		 			$this->Flash->success(__('The hotel has been added.'));
@@ -105,19 +108,23 @@ class HotelsController extends AppController
 
 	public function view($id=null)
     {
+    	// Getting the hotel from URL paramaters
         $hotel = $this->Hotels->get($id);
         $rooms = $this->Rooms->find()->where(['hotel_id' => $id])->contain(['Bookings']);
 
 		// Getting all rooms at the hotel user is viewing
 		$datesRoomBooked = [];
 
+		// Looping through rooms as the CakePHP ORM returns an array from a query
         foreach ($rooms as $room)
         {
         	$newRoomBookings = [];
         	$roomObj = $room->bookings;
+        	// Looping through each room object to access its foreign key data (in this case booking data)
         	foreach ($room->bookings as $roomBooks)
         	{
         		$roomDates = [];
+        		// Calculating all the dates in-between check-in & check-out for each room in database
         		$interval = new DateInterval('P1D');
         		$roomDateR = new DatePeriod($roomBooks->booking_start, $interval, $roomBooks->booking_end);
         		foreach ($roomDateR as $date)
@@ -130,7 +137,7 @@ class HotelsController extends AppController
         	$datesRoomBooked += [$room->roon_number => $newRoomBookings];
         }
 
-        // Getting an array of dates between 
+        // Getting an array of dates between user selected dates
         if ($this->request->is('ajax'))
 		{	
 			// Getting Data from Ajax request
@@ -161,6 +168,7 @@ class HotelsController extends AppController
 					$rooms = $this->Rooms->find()->where(['roon_number' => $room]);
 							foreach ($rooms as $room) 
 							{
+								// This echo is displaying the html for the available rooms poopup if there no bookings at all for that room
 								echo (
 									"<div class='col1'>
 										<img src='/HotelWebsite/img/Rooms/$room->room_img' class='roomImg' />
@@ -186,6 +194,7 @@ class HotelsController extends AppController
 							$rooms = $this->Rooms->find()->where(['roon_number' => $room]);
 								foreach ($rooms as $room) 
 								{
+									// This echo is displaying the html for the available rooms poopup if there are bookings for that room, but its available for the dates the user selected
 									echo (
 										"<div class='col1'>
 											<img src='/HotelWebsite/img/Rooms/$room->room_img' class='roomImg' />
